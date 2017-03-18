@@ -1,0 +1,36 @@
+{
+  "name": "mega-cluster",
+  "version": "0.0.1",
+  "description": "Mega Cluster is a backup management system for mega.nz",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "mega-cluster": "index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Starfox64/mega-cluster.git"
+  },
+  "keywords": [
+    "mega",
+    "backup",
+    "cluster"
+  ],
+  "author": "Starfox64",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Starfox64/mega-cluster/issues"
+  },
+  "homepage": "https://github.com/Starfox64/mega-cluster#readme",
+  "dependencies": {
+    "cli-table": "^0.3.1",
+    "commander": "^2.9.0",
+    "convict": "^2.0.0",
+    "mongoose": "^4.9.0",
+    "rimraf": "^2.6.1",
+    "shell-escape": "^0.2.0",
+    "uid-safe": "^2.1.4"
+  }
+}
