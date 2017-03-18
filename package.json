@@ -1,6 +1,6 @@
 {
   "name": "mega-cluster",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Mega Cluster is a backup management system for mega.nz",
   "main": "index.js",
   "scripts": {

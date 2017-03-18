@@ -260,6 +260,40 @@ commander.command('refresh [email]')
 		db.close();
 	});
 
+commander.command('rm <hash>')
+	.description('Removes a file from the cluster')
+	.option('-t, --type [type]', 'The account type to remove the file from (backup or sharing) [sharing]', 'sharing')
+	.option('-f, --force', 'Remove the file from the database even if it is not removed from mega')
+	.action(async (hash, options) => {
+		if (!Account.ACCOUNT_TYPES.includes(options.type)) {
+			console.error('--type should either be backup or sharing');
+			process.exit(1);
+		}
+
+		let file = await File.findOne({hash, type: options.type}).populate('account');
+
+		if (!file) {
+			console.error('Hash not found!');
+			process.exit(1);
+		}
+
+		try {
+			await mega.rm(file.account.email, file.account.password, hash + '.rar');
+		} catch (e) {
+			if (!options.force) {
+				console.error(`Could not remove file from ${file.account.email}! If it is not on that account anymore, call this command with -f`);
+				console.error(e);
+				process.exit(1);
+			}
+		}
+
+		await file.remove();
+
+		console.log(`${hash} successfully removed.`);
+
+		db.close();
+	});
+
 commander.command('*')
 	.description('output usage information')
 	.action(() => {
